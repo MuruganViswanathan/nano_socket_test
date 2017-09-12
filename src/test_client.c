@@ -10,7 +10,7 @@ int main(int argc, char **argv)
 	int end_point;
 	char buf[SIZE_OF_BUFFER];
 	int bytes;
-	int iterations = 64;
+	int iterations = 128;
 
 	client_socket = nn_socket(AF_SP, NN_PAIR);
 	if (client_socket < 0) {
@@ -30,7 +30,6 @@ int main(int argc, char **argv)
 	while (--iterations) {
 		bytes = nn_send(client_socket, buf, SIZE_OF_BUFFER, 0);
 		printf("Client nn_send() returns %d bytes\n", bytes);
-		sleep(1);
 	}
 	
         nn_shutdown(client_socket, end_point);
