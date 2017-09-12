@@ -14,6 +14,8 @@
 
 cmake_minimum_required(VERSION 2.8.7)
 
+project(test_nanomsg)
+
 include(ExternalProject)
 
 set(INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/_install)
@@ -27,11 +29,7 @@ file(MAKE_DIRECTORY ${TEST_RESULTS_DIR})
 
 include_directories(${INCLUDE_DIR})
 
-if (MAIN_PROJ_BUILD) 
-include_directories(
-                    ${MAIN_PROJ_INCLUDE_PATH}
-                   )	    
-endif ()
+
 # Compile options/flags
 #-------------------------------------------------------------------------------
 add_definitions(-std=c99)
