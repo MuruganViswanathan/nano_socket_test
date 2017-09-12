@@ -29,4 +29,6 @@ extern "C" {
 #include <nanomsg/tcp.h>
 #include <nanomsg/pair.h>
 
+#define SIZE_OF_BUFFER 1024
+
 #endif
