@@ -35,7 +35,6 @@ int main(int argc, char **argv)
 		return -2;	
 	}
 
-	// Need a timer here for clean exit
 	while (1) {
 		char buf[SIZE_OF_BUFFER];
 		int bytes = nn_recv(server_socket, buf, SIZE_OF_BUFFER, 0);

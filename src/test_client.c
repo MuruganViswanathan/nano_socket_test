@@ -19,10 +19,10 @@ int main(int argc, char **argv)
 	}
 
 
-	end_point = nn_connect(client_socket, TCP_URL);
+	end_point = nn_connect(client_socket, TCP_URL_CLIENT);
 
 	if (end_point < 0) {
-		printf("Client nn_connect(%d, %s) failed\n", client_socket, TCP_URL);
+		printf("Client nn_connect(%d, %s) failed\n", client_socket, TCP_URL_CLIENT);
 	        nn_close(client_socket);
 		return -2;	
 	}
