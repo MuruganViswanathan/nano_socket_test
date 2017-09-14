@@ -38,7 +38,7 @@ uint64_t sendtime;
 } test_payload_struct;
 
 
-#define SIZE_OF_BUFFER (sizeof(struct _test_payload_t) + 40)
+#define SIZE_OF_BUFFER (sizeof(struct _test_payload_t) + 512)
 
 
 

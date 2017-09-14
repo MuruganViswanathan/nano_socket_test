@@ -3,13 +3,14 @@
 int main(int argc, char **argv);
 
 int client_socket = -1;
+#define ITERATIONS (1024 * 20)
 
 int main(int argc, char **argv) 
 {
 	int ret = 0;
 	int end_point;
 	char buf[SIZE_OF_BUFFER];
-	int iterations = 128;
+	int iterations = ITERATIONS;
         struct timeval t1, t2;
         unsigned long long total_time = 0;
         int opt_value;
@@ -46,8 +47,9 @@ int main(int argc, char **argv)
                           -(unsigned long long)((t1.tv_sec *1000000) + t1.tv_usec);
 	}
 	
-        printf("\nClient total time for 128 iterations %llu average %llu micro seconds\n", total_time, total_time / 128);
+        printf("\nClient total time for %d iterations %llu average %llu micro seconds\n",
+                ITERATIONS, total_time, total_time / ITERATIONS);
         nn_shutdown(client_socket, end_point);
-
+        nn_close(client_socket);
 	return ret;
 }

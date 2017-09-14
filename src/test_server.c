@@ -50,6 +50,7 @@ int main(int argc, char **argv)
 	}
         
 	nn_shutdown(server_socket, end_point);
+        nn_close(server_socket);
 
 	return ret;
 
