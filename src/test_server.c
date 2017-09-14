@@ -8,7 +8,7 @@ int main(int argc, char **argv)
 {
 	int ret = 0;
 	int end_point;
-        int opt_value = 30 * 1000; // 30 second timeout 
+        int opt_value = 15 * 1000; // 15 second timeout 
 
 	server_socket = nn_socket(AF_SP, NN_PAIR);
 	if (server_socket < 0) {

@@ -12,6 +12,7 @@ int main(int argc, char **argv)
 	int iterations = 128;
         struct timeval t1, t2;
         unsigned long long total_time = 0;
+        int opt_value;
         
 	client_socket = nn_socket(AF_SP, NN_PAIR);
 	if (client_socket < 0) {
@@ -19,6 +20,12 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
+        opt_value = 1;
+        if (nn_setsockopt (client_socket, NN_TCP, NN_TCP_NODELAY, &opt_value, sizeof(opt_value)) < 0)
+        {
+            printf("Client nn_setsockopt(NN_TCP_NODELAY) Failed\n");
+        }
+        
 	end_point = nn_connect(client_socket, TCP_URL);
 
 	if (end_point < 0) {
@@ -35,9 +42,8 @@ int main(int argc, char **argv)
             nn_recv(client_socket, buf, SIZE_OF_BUFFER, 0);
             gettimeofday(&t2, NULL);
             //printf("Client nn_recv() returns %d bytes\n", bytes);
-            total_time += (unsigned long long)(t2.tv_sec - t1.tv_sec)*1000000 +
-                          (unsigned long long)((t2.tv_usec < t1.tv_usec) ?
-                          (t1.tv_usec - t2.tv_usec) : (t2.tv_usec - t1.tv_usec));
+            total_time +=  (unsigned long long)((t2.tv_sec *1000000) + t2.tv_usec)
+                          -(unsigned long long)((t1.tv_sec *1000000) + t1.tv_usec);
 	}
 	
         printf("\nClient total time for 128 iterations %llu average %llu micro seconds\n", total_time, total_time / 128);
