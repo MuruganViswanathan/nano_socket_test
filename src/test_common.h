@@ -12,8 +12,9 @@ extern "C" {
 #define IP_ADDRESS "127.0.0.1"
 
 	/* For simplicity define the whole TCP url */
-#define TCP_URL_CLIENT "tcp://127.0.0.1:9999"
-#define TCP_URL "tcp://*:9999"
+#define TCP_URL "tcp://127.0.0.1:9999"
+// is similar to INADDR_ANY
+//#define TCP_URL "tcp://*:9999"
 
 
 #ifdef __cplusplus
@@ -21,17 +22,24 @@ extern "C" {
 #endif
 
 #include <errno.h>
+#include "stdlib.h"
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include "unistd.h"
 #include <signal.h>
-#include <time.h>
+#include <sys/time.h>
 #include <getopt.h>
 
 #include <nanomsg/nn.h>
 #include <nanomsg/tcp.h>
 #include <nanomsg/pair.h>
 
-#define SIZE_OF_BUFFER 1024
+typedef struct _test_payload_t {
+uint64_t sendtime;
+} test_payload_struct;
+
+
+#define SIZE_OF_BUFFER (sizeof(struct _test_payload_t) + 40)
+
+
 
 #endif

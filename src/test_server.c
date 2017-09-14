@@ -37,9 +37,10 @@ int main(int argc, char **argv)
 
 	while (1) {
 		char buf[SIZE_OF_BUFFER];
-		int bytes = nn_recv(server_socket, buf, SIZE_OF_BUFFER, 0);
-		if (bytes > 0) {
-			printf("Server got %d bytes\n", bytes);
+                
+		if (nn_recv(server_socket, buf, SIZE_OF_BUFFER, 0) > 0) {
+                    //printf("Server got %d bytes\n", bytes);
+                    nn_send(server_socket, buf, SIZE_OF_BUFFER, 0);
 		} else {
                     // we timed out or there is an error
                     printf("Server timed out or got an error, terminating\n");
