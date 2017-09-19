@@ -29,13 +29,26 @@ file(MAKE_DIRECTORY ${TEST_RESULTS_DIR})
 
 include_directories(${INCLUDE_DIR})
 
+# Get git commit hash 
+#-------------------------------------------------------------------------------
+execute_process(
+  COMMAND git describe --tags --always
+  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+  OUTPUT_VARIABLE GIT_COMMIT_TAG
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
+add_definitions("-DGIT_COMMIT_TAG=\"${GIT_COMMIT_TAG}\"")	
 
 # Compile options/flags
 #-------------------------------------------------------------------------------
 add_definitions(-std=c99)
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_GNU_SOURCE -DNOPOLL_LOGGER ")
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -Werror -Wall -Wno-missing-field-initializers")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror -Wall -Wno-missing-field-initializers")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wall")
+
+if (NOT BUILD_YOCTO)
 
 # nanoMsg external dependency
 #-------------------------------------------------------------------------------
@@ -47,6 +60,8 @@ ExternalProject_Add(nanomsg
 )
 add_library(libnanomsg STATIC SHARED IMPORTED)
 add_dependencies(libnanomsg nanomsg)
+
+endif ()
 
 link_directories ( ${LIBRARY_DIR} ${LIBRARY_DIR64} ${COMMON_LIBRARY_DIR} ${MAIN_PROJ_COMMON_PATH} ${MAIN_PROJ_LIB_PATH} ${MAIN_PROJ_LIB64_PATH} )
 
