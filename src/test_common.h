@@ -16,6 +16,9 @@ extern "C" {
 // is similar to INADDR_ANY
 //#define TCP_URL "tcp://*:9999"
 
+#define NN_PROTO_PAIR 1
+
+#define NN_PAIR (NN_PROTO_PAIR * 16 + 0)
 
 #ifdef __cplusplus
 }
@@ -31,7 +34,7 @@ extern "C" {
 
 #include <nanomsg/nn.h>
 #include <nanomsg/tcp.h>
-#include <nanomsg/pair.h>
+//#include <nanomsg/pair.h>
 
 typedef struct _test_payload_t {
 uint64_t sendtime;
