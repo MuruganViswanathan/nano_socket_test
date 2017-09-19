@@ -31,7 +31,7 @@ extern "C" {
 
 #include <nanomsg/nn.h>
 #include <nanomsg/tcp.h>
-#include <nanomsg/pair.h>
+//#include <nanomsg/pair.h>
 
 typedef struct _test_payload_t {
 uint64_t sendtime;
